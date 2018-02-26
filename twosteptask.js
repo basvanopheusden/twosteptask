@@ -7,18 +7,37 @@ get_iti = function(){
 }
 
 respond = function(chosen_image){
+	setTimeout(function(){$('.imgbox').hide()},500)
 	
 	var iti = get_iti()
 	setTimeout(do_trial,iti)
 }
 
-do_trial = function(){
+first_level = function(){
+	
+	first_img = "url('media/" + imgs_block[l[0]] + "')" //0
+	second_img = "url('media/" + imgs_block[l[1]] + "')" //1
+	
+	$('#img1').css("background-image",first_img).off("click").click(function(){
+		setTimeout(second_level(0),500);}).show();
+	$('#img2').css("background-image",second_img).off("click").click(function(){
+		setTimeout(second_level(1),500);}).show();}
 
-	$(/* first image*/).off("click").click(function(){respond(1);});	
-	$(/* second image*/).off("click").click(function(){respond(2);});	
+second_level = function(first_level_choice){
+	
+	transition = (Math.random()<0.8)==first_level_choice //should check this logic
+	
+	first_img = "url('media/" + imgs_block[l[2*transition]] + "')" //2 or 4
+	second_img = "url('media/" + imgs_block[l[2*transition+1]] + "')" //3 or 5
+	$('#img1').css("background-image",first_img).off("click").click(function(){
+		setTimeout(respond(0),500);}).show();
+	$('#img2').css("background-image",second_img).off("click").click(function(){
+		setTimeout(respond(1),500);}).show();}
 }
 
+do_trial = function(){
 	
+
 	
 }
 
