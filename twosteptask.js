@@ -29,7 +29,8 @@ respond = function(chosen_image){
 	$('.imgbox').css("cursor","default")
 	setTimeout(function(){$('.imgbox').hide()},500)
 	console.log('respond')
-	update_rewards(sigma)
+	update_rewards()
+	$('#feedback').text(reward_prob.toString());
 	var iti = get_iti()
 	setTimeout(do_trial,iti)
 }
@@ -70,22 +71,21 @@ do_trial = function(){
 
 // Standard Normal variate using Box-Muller transform.
 randn_bm = function(sigma) {
-    var mu = 0;
-    while(mu === 0) mu = Math.random(); //Converting [0,1) to (0,1)
-    while(sigma === 0) sigma = Math.random();
-    return Math.sqrt( -2.0 * Math.log( mu ) ) * Math.cos( 2.0 * Math.PI * sigma );
+    var u = 0, v = 0;
+    while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+    while(v === 0) v = Math.random();
+    return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
 }
 
 // update rewards!
-update_rewards = function(sigma){
-	for (var i=0; i<5; i++) {
-		reward_prob[i] += randn_bm(sigma);
+update_rewards = function() {
+	for (var i=0; i<4; i++) {
+		reward_prob[i] += sigma*randn_bm();
 	}
 }
 
 $(document).ready( function(){
 	set_img_list()
 	console.log('loading page')
-	$('#feedback').text(reward_prob.toString());
 	do_trial()
 });
