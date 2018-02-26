@@ -22,7 +22,7 @@ set_img_list = function(){
 }
 
 get_iti = function(){
-	return 5000
+	return 1000
 }
 
 respond = function(chosen_image){
@@ -40,11 +40,11 @@ first_level = function(){
 	second_img = "url('media/" + img_list[1] + "')" //1
 	
 $('#img1').css({"background-image" : first_img, "cursor" : "pointer"}).off("click").click(function(){
-		setTimeout(function(){second_level(0)},1000)
+		setTimeout(function(){second_level(0)},750)
 		$('.imgbox').css("cursor","default")
 	}).show();
 	$('#img2').css({"background-image" : second_img, "cursor" : "pointer"}).off("click").click(function(){
-		setTimeout(function(){second_level(0)},1000)
+		setTimeout(function(){second_level(1)},750)
 		$('.imgbox').css("cursor","default")
 	}).show();}
 
@@ -54,11 +54,11 @@ second_level = function(first_level_choice){
 	first_img = "url('media/" + img_list[2*transition] + "')" //2 or 4
 	second_img = "url('media/" + img_list[2*transition+1] + "')" //3 or 5
 	$('#img1').css({"background-image" : first_img, "cursor" : "pointer"}).off("click").click(function(){
-		setTimeout(function(){respond(0)},1000)
+		setTimeout(function(){respond(0)},750)
 		$('.imgbox').css("cursor","default")
 	}).show();
 	$('#img2').css({"background-image" : second_img, "cursor" : "pointer"}).off("click").click(function(){
-		setTimeout(function(){respond(0)},1000)
+		setTimeout(function(){respond(1)},750)
 		$('.imgbox').css("cursor","default")
 	}).show();
 }
