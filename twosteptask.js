@@ -3,6 +3,7 @@ var all_imgs = ["puppy.jpg", "turtle.jpg", "jag.jpg", "duckling.jpg", "volcano.j
 var img_list
 var reward_prob = [0.5,0.5,0.5,0.5]
 var trans_prob = 0.7
+var sigma = 0.025;
 
 function shuffle(array){
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -26,8 +27,7 @@ get_iti = function(){
 
 respond = function(chosen_image){
 	setTimeout(function(){$('.imgbox').hide()},500)
-	
-	update_rewards
+	update_rewards(sigma)
 	var iti = get_iti()
 	setTimeout(do_trial,iti)
 }
@@ -77,5 +77,6 @@ update_rewards = function(sigma){
 $(document).ready( function(){
 	set_img_list()
 	console.log('loading page')
+	$('#feedback').text(reward_prob.toString());
 	do_trial()
 });
