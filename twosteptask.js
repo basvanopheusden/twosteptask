@@ -33,26 +33,25 @@ respond = function(chosen_image){
 }
 
 first_level = function(){
-	
+	console.log('first level')
 	first_img = "url('media/" + img_list[0] + "')" //0
 	second_img = "url('media/" + img_list[1] + "')" //1
 	
 	$('#img1').css("background-image",first_img).off("click").click(function(){
-		setTimeout(second_level(0),500);}).show();
+		setTimeout(second_level(0),10000);}).show();
 	$('#img2').css("background-image",second_img).off("click").click(function(){
-		setTimeout(second_level(1),500);}).show();
+		setTimeout(second_level(1),10000);}).show();
 }
 
 second_level = function(first_level_choice){
-	
-	transition = (Math.random()<trans_prob)==first_level_choice //should check this logic
-	
+	console.log('second level')
+	transition = ((Math.random()<trans_prob)==first_level_choice)+1 //should check this logic
 	first_img = "url('media/" + img_list[2*transition] + "')" //2 or 4
 	second_img = "url('media/" + img_list[2*transition+1] + "')" //3 or 5
 	$('#img1').css("background-image",first_img).off("click").click(function(){
-		setTimeout(respond(0),500);}).show();
+		setTimeout(respond(0),10000);}).show();
 	$('#img2').css("background-image",second_img).off("click").click(function(){
-		setTimeout(respond(1),500);}).show();
+		setTimeout(respond(1),10000);}).show();
 }
 
 do_trial = function(){
