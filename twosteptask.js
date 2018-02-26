@@ -6,6 +6,9 @@ var trans_prob = 0.7
 var sigma = 0.025
 var upper = 0.75
 var lower = 0.25
+var total_reward
+var data
+var trials_completed
 
 function shuffle(array){
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -30,18 +33,21 @@ get_iti = function(){
 respond = function(n){
 	var iti = get_iti()
 	console.log('respond')
-	$('.imgbox').css("cursor","default")
+	reward = Math.random()<reward_prob[n]
+	total_reward += reward
+	console.log('reward:',reward)
+	console.log(n,reward_prob)
+	data[trials_completed]["second_level_choice"]=n
+	data[trials_completed]["reward_prob"]=reward_prob
+	data[trials_completed]["reward"]=reward
+	trials_completed++
+	$('#feedback').text((reward ? "You received 1 point" : "No reward") + 
+	", total reward: " + total_reward.toString());	
 	setTimeout(function(){
-		reward = Math.random()<reward_prob[n]
-		console.log('reward:',reward)
-		console.log(n,reward_prob)
-		$('#feedback').text(reward ? "You received 1 point" : "No reward");	
-		setTimeout(function(){
-			update_rewards()
-			$('#feedback').text("");
-			do_trial()
-		},iti)
-	},500)
+		update_rewards()
+		$('#feedback').text("");
+		do_trial()
+	},iti)
 }
 
 first_level = function(){
@@ -51,28 +57,29 @@ first_level = function(){
 	
 $('#img1').css({"background-image" : first_img, "cursor" : "pointer"}).off("click").click(function(){
 		$('#img2').hide()
-		setTimeout(function(){second_level(0)},750)
+		setTimeout(function(){second_level(0)},500)
 		$('.imgbox').css("cursor","default")
 	}).show();
 	$('#img2').css({"background-image" : second_img, "cursor" : "pointer"}).off("click").click(function(){
 		$('#img1').hide()
-		setTimeout(function(){second_level(1)},750)
+		setTimeout(function(){second_level(1)},500)
 		$('.imgbox').css("cursor","default")
 	}).show();}
 
 second_level = function(first_level_choice){
+	data[trials_completed]={"first_level_choice" : first_level_choice}
 	console.log('second level')
 	transition = ((Math.random()<trans_prob)==first_level_choice) //should check this logic
 	first_img = "url('media/" + img_list[2*transition+2] + "')" //2 or 4
 	second_img = "url('media/" + img_list[2*transition+3] + "')" //3 or 5
 	$('#img1').css({"background-image" : first_img, "cursor" : "pointer"}).off("click").click(function(){
 		$('#img2').hide()
-		setTimeout(function(){respond(2*transition)},750)
+		setTimeout(function(){respond(2*transition)},500)
 		$('.imgbox').css("cursor","default")
 	}).show();
 	$('#img2').css({"background-image" : second_img, "cursor" : "pointer"}).off("click").click(function(){
 		$('#img1').hide()
-		setTimeout(function(){respond(2*transition+1)},750)
+		setTimeout(function(){respond(2*transition+1)},500)
 		$('.imgbox').css("cursor","default")
 	}).show();
 }
@@ -80,7 +87,6 @@ second_level = function(first_level_choice){
 do_trial = function(){
 	first_level()
 }
-
 
 // Standard Normal variate using Box-Muller transform.
 randn_bm = function(sigma) {
@@ -98,8 +104,26 @@ update_rewards = function() {
 	}
 }
 
+function save(filename){
+    var blob = new Blob([JSON.stringify(data)], {type: 'text/csv'});
+	var elem = window.document.createElement('a');
+	elem.href = window.URL.createObjectURL(blob);
+	elem.download = filename;        
+	document.body.appendChild(elem);
+	elem.click();
+	document.body.removeChild(elem);
+}
+
 $(document).ready( function(){
 	set_img_list()
+	total_reward = 0
+	trials_completed = 0
 	console.log('loading page')
 	do_trial()
+	data = []
+	window.onbeforeunload = function(e) {
+		save('Twostepdata' + Date.now().toString() + '.txt');	
+	};
 });
+
+
