@@ -1,0 +1,52 @@
+body{
+	margin:0 auto;
+	font-family:helvetica;
+	text-align: center;
+}
+
+.container{
+	margin:0 auto;
+    height:50vw;
+	width:100vw;
+    position: absolute;
+}
+
+
+.imgbox{
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-position: center center;
+	background-color: #dddddd;
+	position:absolute;
+	margin:0 auto;
+    border: 3px solid;
+    border-radius: 20px;
+	border-color: #222222;
+	bottom:50%;
+	width:30%;
+	height:60%;
+	transform: translate(50%, 50%);
+}
+
+
+#img1{
+	position:absolute;
+	right:30%;
+}
+
+
+#img2{
+	position:absolute;
+	right:70%;
+}
+
+
+
+#feedback{
+	position:absolute;
+	bottom:50%;
+	right:50%;
+	width:50%;
+	height:10%;
+	transform:translate(50%, 50%);
+}
