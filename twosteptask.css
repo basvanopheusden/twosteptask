@@ -20,7 +20,7 @@ body{
 	position:absolute;
 	margin:0 auto;
     border: 3px solid;
-    border-radius: 20px;
+    border-radius: 0px;
 	border-color: #222222;
 	bottom:50%;
 	width:30%;
@@ -31,13 +31,13 @@ body{
 
 #img1{
 	position:absolute;
-	right:30%;
+	right:28%;
 }
 
 
 #img2{
 	position:absolute;
-	right:70%;
+	right:72%;
 }
 
 

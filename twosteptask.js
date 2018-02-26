@@ -2,6 +2,7 @@ var all_imgs = ["puppy.jpg", "turtle.jpg", "jag.jpg", "duckling.jpg", "volcano.j
 
 var img_list
 var reward_prob = [0.5,0.5,0.5,0.5]
+var trans_prob = 0.7
 
 function shuffle(array){
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -26,6 +27,7 @@ get_iti = function(){
 respond = function(chosen_image){
 	setTimeout(function(){$('.imgbox').hide()},500)
 	
+	update_rewards
 	var iti = get_iti()
 	setTimeout(do_trial,iti)
 }
@@ -43,7 +45,7 @@ first_level = function(){
 
 second_level = function(first_level_choice){
 	
-	transition = (Math.random()<0.8)==first_level_choice //should check this logic
+	transition = (Math.random()<trans_prob)==first_level_choice //should check this logic
 	
 	first_img = "url('media/" + img_list[2*transition] + "')" //2 or 4
 	second_img = "url('media/" + img_list[2*transition+1] + "')" //3 or 5
@@ -55,6 +57,22 @@ second_level = function(first_level_choice){
 
 do_trial = function(){
 	first_level()
+}
+
+
+// Standard Normal variate using Box-Muller transform.
+randn_bm = function(sigma) {
+    var mu = 0;
+    while(mu === 0) mu = Math.random(); //Converting [0,1) to (0,1)
+    while(sigma === 0) sigma = Math.random();
+    return Math.sqrt( -2.0 * Math.log( mu ) ) * Math.cos( 2.0 * Math.PI * sigma );
+}
+
+// update rewards!
+update_rewards = function(sigma){
+	for (var i=0; i<5; i++) {
+		reward_prob[i] += randn_bm(sigma);
+	}
 }
 
 $(document).ready( function(){
