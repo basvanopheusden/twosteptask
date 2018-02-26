@@ -25,8 +25,8 @@ get_iti = function(){
 }
 
 respond = function(chosen_image){
-	$('.imgbox').css("cursor","none")
-	setTimeout(function(){$('.imgbox').hide())},500)
+	$('.imgbox').css("cursor","default")
+	setTimeout(function(){$('.imgbox').hide()},500)
 	console.log('respond')
 	update_rewards()
 	var iti = get_iti()
@@ -38,11 +38,14 @@ first_level = function(){
 	first_img = "url('media/" + img_list[0] + "')" //0
 	second_img = "url('media/" + img_list[1] + "')" //1
 	
-	$('#img1').css({"background-image" : first_img, "cursor" : "pointer"}).off("click").click(function(){
-		setTimeout(function(){second_level(0)},1000);}).show();
-	$('#img2')css({"background-image" : second_img, "cursor" : "pointer"}).off("click").click(function(){
-		setTimeout(function(){second_level(1)},1000);}).show();
-}
+$('#img1').css({"background-image" : first_img, "cursor" : "pointer"}).off("click").click(function(){
+		setTimeout(function(){second_level(0)},1000)
+		$('.imgbox').css("cursor","default")
+	}).show();
+	$('#img2').css({"background-image" : second_img, "cursor" : "pointer"}).off("click").click(function(){
+		setTimeout(function(){second_level(0)},1000)
+		$('.imgbox').css("cursor","default")
+	}).show();}
 
 second_level = function(first_level_choice){
 	console.log('second level')
@@ -50,9 +53,13 @@ second_level = function(first_level_choice){
 	first_img = "url('media/" + img_list[2*transition] + "')" //2 or 4
 	second_img = "url('media/" + img_list[2*transition+1] + "')" //3 or 5
 	$('#img1').css({"background-image" : first_img, "cursor" : "pointer"}).off("click").click(function(){
-		setTimeout(function(){respond(0)},1000);}).show();
-	$('#img2').css({"background-image" : first_img, "cursor" : "pointer"}).off("click").click(function(){
-		setTimeout(function(){respond(0)},1000);}).show();
+		setTimeout(function(){respond(0)},1000)
+		$('.imgbox').css("cursor","default")
+	}).show();
+	$('#img2').css({"background-image" : second_img, "cursor" : "pointer"}).off("click").click(function(){
+		setTimeout(function(){respond(0)},1000)
+		$('.imgbox').css("cursor","default")
+	}).show();
 }
 
 do_trial = function(){
