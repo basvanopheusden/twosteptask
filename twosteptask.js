@@ -38,7 +38,7 @@ respond = function(n){
 	console.log('reward:',reward)
 	console.log(n,reward_prob)
 	data[trials_completed]["second_level_choice"]=n
-	data[trials_completed]["reward_prob"]=reward_prob
+	data[trials_completed]["reward_prob"]=reward_prob.slice()
 	data[trials_completed]["reward"]=reward
 	trials_completed++
 	$('#feedback').text((reward ? "You received 1 point" : "No reward") + 
@@ -98,6 +98,7 @@ randn_bm = function(sigma) {
 
 // update rewards!
 update_rewards = function() {
+	console.log('updating')
 	for (var i=0; i<4; i++) {
 		reward_prob[i] += sigma*randn_bm();
 		reward_prob[i] = Math.min(Math.max(reward_prob[i],lower),upper);
