@@ -17,7 +17,7 @@ function shuffle(array){
 }
 
 set_img_list = function(){
-	img_list = shuffle(imgs).slice(0,6);
+	img_list = shuffle(all_imgs).slice(0,6);
 }
 
 get_iti = function(){
@@ -77,5 +77,6 @@ update_rewards = function(sigma){
 
 $(document).ready( function(){
 	set_img_list()
+	console.log('loading page')
 	do_trial()
 });
