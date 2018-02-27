@@ -115,12 +115,27 @@ function save(filename){
 	document.body.removeChild(elem);
 }
 
+do_inst = function() {
+	$(".overlayed").show();
+	$('.instructions').show();
+	
+	for (var i=1; i<=6; i++) {
+		$('#inst'+i.toString()).css({"background-image" : "url('media/" + img_list[i-1] + "')"})
+	}
+	
+	$('.mybutton').click(function(){
+		$('.instructions').hide();
+		$(".overlayed").hide();
+		do_trial();
+	});
+}
+
 $(document).ready( function(){
 	set_img_list()
 	total_reward = 0
 	trials_completed = 0
 	console.log('loading page')
-	do_trial()
+	do_inst()
 	data = []
 	window.onbeforeunload = function(e) {
 		save('Twostepdata' + Date.now().toString() + '.txt');	

@@ -4,8 +4,14 @@
         <title> Two step task </title>
         <meta charset="utf-8">
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-		<script src="twosteptask.js" type="text/javascript"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <script src="twosteptask.js" type="text/javascript"></script>
 
         <link rel='stylesheet' type='text/css' href='twosteptask.css'/>       
 
@@ -17,5 +23,52 @@
 		<div class="imgbox" id="img2" style="display:visible"></div>
 		<div id="feedback" style="display:visible"></div>
 	</div>		
+	
+	<div class="overlayed" ></div>
+	<div class="instructions" style="display:none">
+		<div class="container-fluid">
+			<div class="row align-items-center no-gutters">
+				<div class="col-xs-6 no-gutters" align="center">
+					<div class="imgbox instr1" id="inst1" style = "display:visible"></div>
+				</div>
+				<div class="col-xs-6 no-gutters" align="center">
+					<div class="imgbox instr1" id="inst2" style = "display:visible"></div>
+				</div>
+			</div>
+			<div class="row align-items-center no-gutters" align="center">
+				<div class="col-xs-6 no-gutters" align="center">
+					<div class="col-xs-3 no-gutters" align="center">
+						<div class="imgbox instr2" id="inst3" style = "display:visible"></div>
+					</div>
+					<div class="col-xs-3 no-gutters" align="center">
+						<div class="imgbox instr3" id="inst4" style = "display:visible"></div>
+					</div>	
+				</div>
+				<div class="col-xs-6 no-gutters" align="center">
+					<div class="col-xs-3 no-gutters" align="center">
+						<div class="imgbox instr2" id="inst5" style = "display:visible"></div>
+					</div>
+					<div class="col-xs-3 no-gutters" align="center">
+						<div class="imgbox instr3" id="inst6" style = "display:visible"></div>
+					</div>	
+				</div>
+			</div>
+			<button type="button" class="mybutton" style="position:absolute;bottom:8%;right:50%">start task!</button>
+		
+		<svg width="500" height="150" style="position:relative;bottom:30vh;left:2vw;transform: translate(50%, 50%);">
+			<defs>
+			<marker id="arrow" markerWidth="13" markerHeight="13" refx="2" refy="6" orient="auto">
+				<path d="M2,1 L2,10 L10,6 L2,2" style="fill:#1885b0;" />
+			</marker>
+			</defs>
+			
+			<path d="M450,20 L40,100"
+				style="stroke:#1885b0; stroke-width: 1.25px; fill: none;
+				marker-end: url(#arrow);"
+			/>
+			
+		</svg>
+		</div>
+	</div>
 	</body>
 </html>
